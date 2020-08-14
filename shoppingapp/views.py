@@ -1,7 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from math import ceil
-from .models import Product
+from .models import Product, Contact
+# import the logging library
+import logging
+
+# Get an instance of a logger
+logger = logging.getLogger(__name__)
+# Create your views here.
 
 def index(request):
     # products = Product.objects.all()
@@ -28,6 +34,13 @@ def about(request):
     return render(request, 'shoppingapp/about.html')
 
 def contact(request):
+    if request.method=="POST":
+        name = request.POST.get('name', '')
+        email = request.POST.get('email', '')
+        phone = request.POST.get('phone', '')
+        desc = request.POST.get('desc', '')
+        contact = Contact(name=name, email=email, phone=phone, desc=desc)
+        contact.save()
     return render(request, 'shoppingapp/contact.html')
 
 def tracker(request):
@@ -36,8 +49,12 @@ def tracker(request):
 def search(request):
     return render(request, 'shoppingapp/search.html')
 
-def productView(request):
-    return render(request, 'prodView.html')
+def productView(request, myid):
+    # Fetch the product using the id
+    product = Product.objects.filter(id=myid)
+    return render(request, 'shoppingapp/prodView.html', {'product':product[0]})
+    #product[0] because it is a single item list
+
 
 def checkout(request):
-    return render(request, 'checkout.html')
+    return render(request, 'shoppingapp/checkout.html')
