@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 SECRET_KEY = 'yb_uismf*%8-9rc-o@+91x3ax!6=(gszl)c+89$n+1z&j5twk$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['sparshbatra29.pythonanywhere.com']
 
 
 # Application definition
@@ -120,7 +120,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT='/home/sparshbatra29/E-commerce-Portal/static'
 
 #Managing Media
 MEDIA_ROOT= os.path.join(BASE_DIR, "media")
-MEDIA_URL="/media/"
+MEDIA_URL="/home/sparshbatra29/E-commerce-Portal/media/"
